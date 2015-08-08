@@ -36,11 +36,10 @@ public class Main extends Application {
         double sceneSizeHeight = 700;
         Scene scene = new Scene(pane, sceneSizeWidth, sceneSizeHeight);
         primaryStage.setScene(scene);
+        primaryStage.show();
 
         //TODO: アイコンの追加。(やり方がいまいちつかめていない。)
         //primaryStage.getIcons().add(new Image(getClass().getResourceAsStream("reversi.png")));
-
-        primaryStage.show();
 
         // Diskを四枚回転
         Disk disk = Disk.getInstance();
