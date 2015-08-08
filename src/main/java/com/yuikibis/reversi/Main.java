@@ -21,13 +21,10 @@ public class Main extends Application {
     }
 
     private void initGame() {
-        String appName = "Reversi";
-        double sceneSizeWidth = 660;
-        double sceneSizeHeight = 700;
-
         Table table = Table.getInstance();
         Group root = table.getRoot();
 
+        String appName = "Reversi";
         primaryStage.setTitle(appName);
         primaryStage.setResizable(false);
 
@@ -35,6 +32,8 @@ public class Main extends Application {
         pane.setTop(makeMenu());
         pane.setBottom(root);
 
+        double sceneSizeWidth = 660;
+        double sceneSizeHeight = 700;
         Scene scene = new Scene(pane, sceneSizeWidth, sceneSizeHeight);
         primaryStage.setScene(scene);
 

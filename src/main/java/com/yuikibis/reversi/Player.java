@@ -90,47 +90,47 @@ public class Player {
         Name name = this.name;
         Player nextPlayer = getNextPlayer();
 
-        int tmp;
+        int reversedAmount;
         boolean isReversed = false;
-        if ((tmp = reverseTop(name, coordinate)) > 0) {
+        if ((reversedAmount = reverseTop(name, coordinate)) > 0) {
             isReversed = true;
-            this.score += tmp;
-            nextPlayer.score -= tmp;
+            this.score += reversedAmount;
+            nextPlayer.score -= reversedAmount;
         }
-        if ((tmp = reverseRight(name, coordinate)) > 0) {
+        if ((reversedAmount = reverseRight(name, coordinate)) > 0) {
             isReversed = true;
-            this.score += tmp;
-            nextPlayer.score -= tmp;
+            this.score += reversedAmount;
+            nextPlayer.score -= reversedAmount;
         }
-        if ((tmp = reverseBottom(name, coordinate)) > 0) {
+        if ((reversedAmount = reverseBottom(name, coordinate)) > 0) {
             isReversed = true;
-            this.score += tmp;
-            nextPlayer.score -= tmp;
+            this.score += reversedAmount;
+            nextPlayer.score -= reversedAmount;
         }
-        if ((tmp = reverseLeft(name, coordinate)) > 0) {
+        if ((reversedAmount = reverseLeft(name, coordinate)) > 0) {
             isReversed = true;
-            this.score += tmp;
-            nextPlayer.score -= tmp;
+            this.score += reversedAmount;
+            nextPlayer.score -= reversedAmount;
         }
-        if ((tmp = reverseUpperRight(name, coordinate)) > 0) {
+        if ((reversedAmount = reverseUpperRight(name, coordinate)) > 0) {
             isReversed = true;
-            this.score += tmp;
-            nextPlayer.score -= tmp;
+            this.score += reversedAmount;
+            nextPlayer.score -= reversedAmount;
         }
-        if ((tmp = reverseUpperLeft(name, coordinate)) > 0) {
+        if ((reversedAmount = reverseUpperLeft(name, coordinate)) > 0) {
             isReversed = true;
-            this.score += tmp;
-            nextPlayer.score -= tmp;
+            this.score += reversedAmount;
+            nextPlayer.score -= reversedAmount;
         }
-        if ((tmp = reverseLowerRight(name, coordinate)) > 0) {
+        if ((reversedAmount = reverseLowerRight(name, coordinate)) > 0) {
             isReversed = true;
-            this.score += tmp;
-            nextPlayer.score -= tmp;
+            this.score += reversedAmount;
+            nextPlayer.score -= reversedAmount;
         }
-        if ((tmp = reverseLowerLeft(name, coordinate)) > 0) {
+        if ((reversedAmount = reverseLowerLeft(name, coordinate)) > 0) {
             isReversed = true;
-            this.score += tmp;
-            nextPlayer.score -= tmp;
+            this.score += reversedAmount;
+            nextPlayer.score -= reversedAmount;
         }
 
         // 置いた分のスコアを増加し、次のターンに

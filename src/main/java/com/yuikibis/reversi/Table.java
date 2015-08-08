@@ -23,7 +23,7 @@ public class Table {
 
 
     private Table() {
-        root.getChildren().addAll(makePane(), makeHorizontalLine(), makeVerticalLine(), makeDetailsLine(), makeScoreLine(), makePath(), makeResult());
+        root.getChildren().addAll(makePane(), makeHorizontalLine(), makeVerticalLine(), makeCurrentTurn(), makeScoreLine(), makeBoarder(), makeResult());
     }
 
 
@@ -46,19 +46,17 @@ public class Table {
         return root;
     }
 
-    private Path makePath() {
+    private Path makeBoarder() {
         return new Path(new MoveTo(60.0, 45.0), new LineTo(600.0, 45.0));
     }
 
     private GridPane makePane() {
+        GridPane pane = new GridPane();
+        pane.setStyle("-fx-background-color: #a0c000;");
         double panePaddingTop = 90.0;
         double panePaddingRight = 50.0;
         double panePaddingBottom = 50.0;
         double panePaddingLeft = 50.0;
-        double diskMargin = 5.0;
-
-        GridPane pane = new GridPane();
-        pane.setStyle("-fx-background-color: #a0c000;");
         pane.setPadding(new Insets(panePaddingTop, panePaddingRight, panePaddingBottom, panePaddingLeft));
         pane.setGridLinesVisible(true);
 
@@ -67,6 +65,7 @@ public class Table {
         for (int row = 0; row < 8; row++) {
             for (int col = 0; col < 8; col++) {
                 pane.add(disks[row][col], row, col);
+                double diskMargin = 5.0;
                 GridPane.setMargin(disks[row][col], new Insets(diskMargin, diskMargin, diskMargin, diskMargin));
             }
         }
@@ -75,22 +74,19 @@ public class Table {
     }
 
     private VBox makeVerticalLine() {
+        VBox vBox = new VBox();
         double vBoxPaddingTop = 90.0;
         double vBoxPaddingRight = 0.0;
         double vBoxPaddingBottom = 50.0;
         double vBoxPaddingLeft = 15.0;
-
-        double itemPaddingTop = 18.5;
-        double itemPaddingRight = 0.0;
-        double itemPaddingBottom = 18.5;
-        double itemPaddingLeft = 0.0;
-
-        double fontSize = 30.0;
-
-        VBox vBox = new VBox();
         vBox.setPadding(new Insets(vBoxPaddingTop, vBoxPaddingRight, vBoxPaddingBottom, vBoxPaddingLeft));
 
         for (int i = 1; i <= 8; i++) {
+            double itemPaddingTop = 18.5;
+            double itemPaddingRight = 0.0;
+            double itemPaddingBottom = 18.5;
+            double itemPaddingLeft = 0.0;
+            double fontSize = 30.0;
             Label label = makeLineLabel(String.valueOf(i), fontSize, itemPaddingTop, itemPaddingRight, itemPaddingBottom, itemPaddingLeft);
             vBox.getChildren().add(label);
         }
@@ -99,22 +95,19 @@ public class Table {
     }
 
     private HBox makeHorizontalLine() {
+        HBox hBox = new HBox();
         double hBoxPaddingTop = 50.0;
         double hBoxPaddingRight = 50.0;
         double hBoxPaddingBottom = 0.0;
         double hBoxPaddingLeft = 50.0;
-
-        double itemPaddingTop = 0.0;
-        double itemPaddingRight = 27.0;
-        double itemPaddingBottom = 0.0;
-        double itemPaddingLeft = 26.0;
-
-        double fontSize = 30.0;
-
-        HBox hBox = new HBox();
         hBox.setPadding(new Insets(hBoxPaddingTop, hBoxPaddingRight, hBoxPaddingBottom, hBoxPaddingLeft));
 
         for (char counter = 'a'; counter <= 'h'; counter++) {
+            double itemPaddingTop = 0.0;
+            double itemPaddingRight = 27.0;
+            double itemPaddingBottom = 0.0;
+            double itemPaddingLeft = 26.0;
+            double fontSize = 30.0;
             Label label = makeLineLabel(String.valueOf(counter), fontSize, itemPaddingTop, itemPaddingRight, itemPaddingBottom, itemPaddingLeft);
             hBox.getChildren().add(label);
         }
@@ -123,21 +116,18 @@ public class Table {
     }
 
     private HBox makeResult() {
+        HBox hBox = new HBox();
         double hBoxPaddingTop = 0.0;
         double hBoxPaddingRight = 0.0;
         double hBoxPaddingBottom = 0.0;
         double hBoxPaddingLeft = 265.0;
+        hBox.setPadding(new Insets(hBoxPaddingTop, hBoxPaddingRight, hBoxPaddingBottom, hBoxPaddingLeft));
 
         double itemPaddingTop = 10.0;
         double itemPaddingRight = 0.0;
         double itemPaddingBottom = 18.5;
         double itemPaddingLeft = 0.0;
-
         double fontSize = 25.0;
-
-        HBox hBox = new HBox();
-        hBox.setPadding(new Insets(hBoxPaddingTop, hBoxPaddingRight, hBoxPaddingBottom, hBoxPaddingLeft));
-
         result = makeLineLabel("", fontSize, itemPaddingTop, itemPaddingRight, itemPaddingBottom, itemPaddingLeft);
 
         hBox.getChildren().add(result);
@@ -145,22 +135,19 @@ public class Table {
         return hBox;
     }
 
-    private HBox makeDetailsLine() {
+    private HBox makeCurrentTurn() {
+        HBox hBox = new HBox();
         double hBoxPaddingTop = 0.0;
         double hBoxPaddingRight = 0.0;
         double hBoxPaddingBottom = 0.0;
         double hBoxPaddingLeft = 50.0;
+        hBox.setPadding(new Insets(hBoxPaddingTop, hBoxPaddingRight, hBoxPaddingBottom, hBoxPaddingLeft));
 
         double itemPaddingTop = 10.0;
         double itemPaddingRight = 0.0;
         double itemPaddingBottom = 18.5;
         double itemPaddingLeft = 0.0;
-
         double fontSize = 25.0;
-
-        HBox hBox = new HBox();
-        hBox.setPadding(new Insets(hBoxPaddingTop, hBoxPaddingRight, hBoxPaddingBottom, hBoxPaddingLeft));
-
         currentPlayer = makeLineLabel("「" + Player.getCurrentPlayer().getName().toString() + "」のターン", fontSize, itemPaddingTop, itemPaddingRight, itemPaddingBottom, itemPaddingLeft);
 
         hBox.getChildren().add(currentPlayer);
@@ -169,23 +156,21 @@ public class Table {
     }
 
     private HBox makeScoreLine() {
+        HBox hBox = new HBox();
+        hBox.setAlignment(Pos.BOTTOM_CENTER);
         double hBoxPaddingTop = 0.0;
         double hBoxPaddingRight = 0.0;
         double hBoxPaddingBottom = 0.0;
         double hBoxPaddingLeft = 465.0;
+        hBox.setPadding(new Insets(hBoxPaddingTop, hBoxPaddingRight, hBoxPaddingBottom, hBoxPaddingLeft));
 
+        Player[] players = Player.getInstance();
         double itemPaddingTop = 10.0;
         double itemPaddingRight = 0.0;
         double itemPaddingBottom = 18.5;
         double itemPaddingLeft = 0.0;
 
         double fontSize = 25.0;
-
-        HBox hBox = new HBox();
-        hBox.setAlignment(Pos.BOTTOM_CENTER);
-        hBox.setPadding(new Insets(hBoxPaddingTop, hBoxPaddingRight, hBoxPaddingBottom, hBoxPaddingLeft));
-
-        Player[] players = Player.getInstance();
         blackScore = makeLineLabel("黒：" + String.format("%02d", players[Player.Name.Black.getIndex()].getScore()), fontSize, itemPaddingTop, itemPaddingRight, itemPaddingBottom, itemPaddingLeft);
         whiteScore = makeLineLabel(" 白：" + String.format("%02d", players[Player.Name.White.getIndex()].getScore()), fontSize, itemPaddingTop, itemPaddingRight, itemPaddingBottom, itemPaddingLeft);
 
