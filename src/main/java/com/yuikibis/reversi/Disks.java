@@ -11,7 +11,7 @@ import java.util.Objects;
 
 public class Disks {
     private static Disks disks;
-    List<List<Circle>> listOfList = new ArrayList<>();
+    private final List<List<Circle>> listOfList = new ArrayList<>();
 
     private Disks() {
         double circleSize = 30;
@@ -76,7 +76,7 @@ public class Disks {
         return false;
     }
 
-    public boolean checkAround(Player.Name name, Coordinate coordinate) {
+    private boolean checkAround(Player.Name name, Coordinate coordinate) {
         return checkTop(name, coordinate) > 0
                 || checkRight(name, coordinate) > 0
                 || checkBottom(name, coordinate) > 0

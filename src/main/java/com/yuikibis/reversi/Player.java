@@ -54,15 +54,7 @@ public class Player {
         return current;
     }
 
-    public static Player getNextPlayer() {
-        if (current == blackPlayer) {
-            return whitePlayer;
-        } else {
-            return blackPlayer;
-        }
-    }
-
-    public static void next() {
+    private static void next() {
         if (current == blackPlayer) {
             current = whitePlayer;
         } else {
