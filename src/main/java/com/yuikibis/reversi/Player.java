@@ -120,7 +120,7 @@ public class Player {
         table.setScoreLabel(Name.White, whiteScore);
 
         if (blackScore + whiteScore == 64) {
-            table.setResult();
+            table.showResult();
         }
     }
 
