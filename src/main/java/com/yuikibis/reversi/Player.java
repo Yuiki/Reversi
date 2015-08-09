@@ -81,69 +81,50 @@ public class Player {
     }
 
     public void reverse(Coordinate coordinate) {
-        Name name = this.name;
-        Player nextPlayer = getNextPlayer();
+        int oldTotalScore = blackPlayer.score + whitePlayer.score;
 
-        int reversedAmount;
-        boolean isReversed = false;
-        if ((reversedAmount = reverseTop(name, coordinate)) > 0) {
-            isReversed = true;
-            this.score += reversedAmount;
-            nextPlayer.score -= reversedAmount;
-        }
-        if ((reversedAmount = reverseRight(name, coordinate)) > 0) {
-            isReversed = true;
-            this.score += reversedAmount;
-            nextPlayer.score -= reversedAmount;
-        }
-        if ((reversedAmount = reverseBottom(name, coordinate)) > 0) {
-            isReversed = true;
-            this.score += reversedAmount;
-            nextPlayer.score -= reversedAmount;
-        }
-        if ((reversedAmount = reverseLeft(name, coordinate)) > 0) {
-            isReversed = true;
-            this.score += reversedAmount;
-            nextPlayer.score -= reversedAmount;
-        }
-        if ((reversedAmount = reverseUpperRight(name, coordinate)) > 0) {
-            isReversed = true;
-            this.score += reversedAmount;
-            nextPlayer.score -= reversedAmount;
-        }
-        if ((reversedAmount = reverseUpperLeft(name, coordinate)) > 0) {
-            isReversed = true;
-            this.score += reversedAmount;
-            nextPlayer.score -= reversedAmount;
-        }
-        if ((reversedAmount = reverseLowerRight(name, coordinate)) > 0) {
-            isReversed = true;
-            this.score += reversedAmount;
-            nextPlayer.score -= reversedAmount;
-        }
-        if ((reversedAmount = reverseLowerLeft(name, coordinate)) > 0) {
-            isReversed = true;
-            this.score += reversedAmount;
-            nextPlayer.score -= reversedAmount;
-        }
+        reverseTop(this.name, coordinate);
+        reverseRight(this.name, coordinate);
+        reverseBottom(this.name, coordinate);
+        reverseLeft(this.name, coordinate);
+        reverseUpperRight(this.name, coordinate);
+        reverseUpperLeft(this.name, coordinate);
+        reverseLowerRight(this.name, coordinate);
+        reverseLowerLeft(this.name, coordinate);
 
-        // 置いた分のスコアを増加し、次のターンに
-        if (isReversed) {
-            this.score += 1;
+        Disk disk = Disk.getInstance();
+        Circle[][] circles = disk.getCircles();
+        int blackScore = 0;
+        int whiteScore = 0;
+        for (int col = 0; col < 8; col++) {
+            for (int row = 0; row < 8; row++) {
+                if (circles[col][row].getFill() == Color.BLACK) {
+                    blackScore++;
+                } else if (circles[col][row].getFill() == Color.WHITE) {
+                    whiteScore++;
+                }
+            }
+        }
+        blackPlayer.score = blackScore;
+        whitePlayer.score = whiteScore;
+
+        int newTotalScore = blackScore + whiteScore;
+        // 場の石に変化があれば次のターンへ
+        if (newTotalScore != oldTotalScore) {
             next();
         }
 
         Table table = Table.getInstance();
         table.setCurrentPlayerLabel(Player.getCurrentPlayer().getName().toString());
-        table.setScoreLabel(Name.Black,blackPlayer.getScore());
-        table.setScoreLabel(Name.White, whitePlayer.getScore());
+        table.setScoreLabel(Name.Black, blackScore);
+        table.setScoreLabel(Name.White, whiteScore);
 
-        if (blackPlayer.getScore() + whitePlayer.getScore() == 64) {
+        if (blackScore + whiteScore == 64) {
             table.setResult();
         }
     }
 
-    private int reverseTop(Name name, Coordinate coordinate) {
+    private void reverseTop(Name name, Coordinate coordinate) {
         Disk disk = Disk.getInstance();
         Circle[][] disks = disk.getCircles();
 
@@ -151,11 +132,9 @@ public class Player {
         for (int i = 0, x2 = coordinate.x, y2 = coordinate.y; i < amount && y2 >= 0; i++, y2--) {
             disks[x2][y2].setFill(name.getColor());
         }
-
-        return amount - 1;
     }
 
-    private int reverseBottom(Name name, Coordinate coordinate) {
+    private void reverseBottom(Name name, Coordinate coordinate) {
         Disk disk = Disk.getInstance();
         Circle[][] disks = disk.getCircles();
 
@@ -163,11 +142,9 @@ public class Player {
         for (int i = 0, x2 = coordinate.x, y2 = coordinate.y; i < amount && y2 < 8; i++, y2++) {
             disks[x2][y2].setFill(name.getColor());
         }
-
-        return amount - 1;
     }
 
-    private int reverseRight(Name name, Coordinate coordinate) {
+    private void reverseRight(Name name, Coordinate coordinate) {
         Disk disk = Disk.getInstance();
         Circle[][] disks = disk.getCircles();
 
@@ -175,11 +152,9 @@ public class Player {
         for (int i = 0, x2 = coordinate.x, y2 = coordinate.y; i < amount && x2 < 8; i++, x2++) {
             disks[x2][y2].setFill(name.getColor());
         }
-
-        return amount - 1;
     }
 
-    private int reverseLeft(Name name, Coordinate coordinate) {
+    private void reverseLeft(Name name, Coordinate coordinate) {
         Disk disk = Disk.getInstance();
         Circle[][] disks = disk.getCircles();
 
@@ -187,11 +162,9 @@ public class Player {
         for (int i = 0, x2 = coordinate.x, y2 = coordinate.y; i < amount && x2 >= 0; i++, x2--) {
             disks[x2][y2].setFill(name.getColor());
         }
-
-        return amount - 1;
     }
 
-    private int reverseUpperRight(Name name, Coordinate coordinate) {
+    private void reverseUpperRight(Name name, Coordinate coordinate) {
         Disk disk = Disk.getInstance();
         Circle[][] disks = disk.getCircles();
 
@@ -199,11 +172,9 @@ public class Player {
         for (int i = 0, x2 = coordinate.x, y2 = coordinate.y; i < amount && x2 < 8 && y2 >= 0; i++, x2++, y2--) {
             disks[x2][y2].setFill(name.getColor());
         }
-
-        return amount - 1;
     }
 
-    private int reverseUpperLeft(Name name, Coordinate coordinate) {
+    private void reverseUpperLeft(Name name, Coordinate coordinate) {
         Disk disk = Disk.getInstance();
         Circle[][] disks = disk.getCircles();
 
@@ -211,11 +182,9 @@ public class Player {
         for (int i = 0, x2 = coordinate.x, y2 = coordinate.y; i < amount && x2 >= 0 && y2 >= 0; i++, x2--, y2--) {
             disks[x2][y2].setFill(name.getColor());
         }
-
-        return amount - 1;
     }
 
-    private int reverseLowerRight(Name name, Coordinate coordinate) {
+    private void reverseLowerRight(Name name, Coordinate coordinate) {
         Disk disk = Disk.getInstance();
         Circle[][] disks = disk.getCircles();
 
@@ -223,11 +192,9 @@ public class Player {
         for (int i = 0, x2 = coordinate.x, y2 = coordinate.y; i < amount && x2 < 8 && y2 < 8; i++, x2++, y2++) {
             disks[x2][y2].setFill(name.getColor());
         }
-
-        return amount - 1;
     }
 
-    private int reverseLowerLeft(Name name, Coordinate coordinate) {
+    private void reverseLowerLeft(Name name, Coordinate coordinate) {
         Disk disk = Disk.getInstance();
         Circle[][] disks = disk.getCircles();
 
@@ -235,8 +202,6 @@ public class Player {
         for (int i = 0, x2 = coordinate.x, y2 = coordinate.y; i < amount && x2 >= 0 && y2 < 8; i++, x2--, y2++) {
             disks[x2][y2].setFill(name.getColor());
         }
-
-        return amount - 1;
     }
 
     public Name getName() {

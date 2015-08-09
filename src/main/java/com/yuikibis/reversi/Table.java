@@ -188,7 +188,7 @@ public class Table {
         return hBox;
     }
 
-
+    // TODO: showResult()にする
     public void setResult() {
         Optional<Player> oBlackPlayer = Optional.ofNullable(Player.getInstance(Player.Name.Black));
         Optional<Player> oWhitePlayer = Optional.ofNullable(Player.getInstance(Player.Name.White));
