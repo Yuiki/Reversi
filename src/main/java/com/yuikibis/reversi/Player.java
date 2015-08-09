@@ -1,7 +1,6 @@
 package com.yuikibis.reversi;
 
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
 
 public class Player {
     private static Player blackPlayer = new Player(Name.Black);
@@ -70,8 +69,8 @@ public class Player {
             current = blackPlayer;
         }
 
-        Disk disk = Disk.getInstance();
-        if (!disk.checkHittable(current.getName())) {
+        Disks disks = Disks.getInstance();
+        if (!disks.checkHittable(current.getName())) {
             if (current == blackPlayer) {
                 current = whitePlayer;
             } else {
@@ -92,15 +91,14 @@ public class Player {
         reverseLowerRight(this.name, coordinate);
         reverseLowerLeft(this.name, coordinate);
 
-        Disk disk = Disk.getInstance();
-        Circle[][] circles = disk.getCircles();
+        Disks disks = Disks.getInstance();
         int blackScore = 0;
         int whiteScore = 0;
         for (int col = 0; col < 8; col++) {
             for (int row = 0; row < 8; row++) {
-                if (circles[col][row].getFill() == Color.BLACK) {
+                if (disks.getDisk(col, row).getFill() == Color.BLACK) {
                     blackScore++;
-                } else if (circles[col][row].getFill() == Color.WHITE) {
+                } else if (disks.getDisk(col, row).getFill() == Color.WHITE) {
                     whiteScore++;
                 }
             }
@@ -125,82 +123,74 @@ public class Player {
     }
 
     private void reverseTop(Name name, Coordinate coordinate) {
-        Disk disk = Disk.getInstance();
-        Circle[][] disks = disk.getCircles();
+        Disks disks = Disks.getInstance();
 
-        int amount = disk.checkTop(name, coordinate);
+        int amount = disks.checkTop(name, coordinate);
         for (int i = 0, x2 = coordinate.x, y2 = coordinate.y; i < amount && y2 >= 0; i++, y2--) {
-            disks[x2][y2].setFill(name.getColor());
+            disks.getDisk(x2, y2).setFill(name.getColor());
         }
     }
 
     private void reverseBottom(Name name, Coordinate coordinate) {
-        Disk disk = Disk.getInstance();
-        Circle[][] disks = disk.getCircles();
+        Disks disks = Disks.getInstance();
 
-        int amount = disk.checkBottom(name, coordinate);
+        int amount = disks.checkBottom(name, coordinate);
         for (int i = 0, x2 = coordinate.x, y2 = coordinate.y; i < amount && y2 < 8; i++, y2++) {
-            disks[x2][y2].setFill(name.getColor());
+            disks.getDisk(x2, y2).setFill(name.getColor());
         }
     }
 
     private void reverseRight(Name name, Coordinate coordinate) {
-        Disk disk = Disk.getInstance();
-        Circle[][] disks = disk.getCircles();
+        Disks disks = Disks.getInstance();
 
-        int amount = disk.checkRight(name, coordinate);
+        int amount = disks.checkRight(name, coordinate);
         for (int i = 0, x2 = coordinate.x, y2 = coordinate.y; i < amount && x2 < 8; i++, x2++) {
-            disks[x2][y2].setFill(name.getColor());
+            disks.getDisk(x2, y2).setFill(name.getColor());
         }
     }
 
     private void reverseLeft(Name name, Coordinate coordinate) {
-        Disk disk = Disk.getInstance();
-        Circle[][] disks = disk.getCircles();
+        Disks disks = Disks.getInstance();
 
-        int amount = disk.checkLeft(name, coordinate);
+        int amount = disks.checkLeft(name, coordinate);
         for (int i = 0, x2 = coordinate.x, y2 = coordinate.y; i < amount && x2 >= 0; i++, x2--) {
-            disks[x2][y2].setFill(name.getColor());
+            disks.getDisk(x2, y2).setFill(name.getColor());
         }
     }
 
     private void reverseUpperRight(Name name, Coordinate coordinate) {
-        Disk disk = Disk.getInstance();
-        Circle[][] disks = disk.getCircles();
+        Disks disks = Disks.getInstance();
 
-        int amount = disk.checkUpperRight(name, coordinate);
+        int amount = disks.checkUpperRight(name, coordinate);
         for (int i = 0, x2 = coordinate.x, y2 = coordinate.y; i < amount && x2 < 8 && y2 >= 0; i++, x2++, y2--) {
-            disks[x2][y2].setFill(name.getColor());
+            disks.getDisk(x2, y2).setFill(name.getColor());
         }
     }
 
     private void reverseUpperLeft(Name name, Coordinate coordinate) {
-        Disk disk = Disk.getInstance();
-        Circle[][] disks = disk.getCircles();
+        Disks disks = Disks.getInstance();
 
-        int amount = disk.checkUpperLeft(name, coordinate);
+        int amount = disks.checkUpperLeft(name, coordinate);
         for (int i = 0, x2 = coordinate.x, y2 = coordinate.y; i < amount && x2 >= 0 && y2 >= 0; i++, x2--, y2--) {
-            disks[x2][y2].setFill(name.getColor());
+            disks.getDisk(x2, y2).setFill(name.getColor());
         }
     }
 
     private void reverseLowerRight(Name name, Coordinate coordinate) {
-        Disk disk = Disk.getInstance();
-        Circle[][] disks = disk.getCircles();
+        Disks disks = Disks.getInstance();
 
-        int amount = disk.checkLowerRight(name, coordinate);
+        int amount = disks.checkLowerRight(name, coordinate);
         for (int i = 0, x2 = coordinate.x, y2 = coordinate.y; i < amount && x2 < 8 && y2 < 8; i++, x2++, y2++) {
-            disks[x2][y2].setFill(name.getColor());
+            disks.getDisk(x2, y2).setFill(name.getColor());
         }
     }
 
     private void reverseLowerLeft(Name name, Coordinate coordinate) {
-        Disk disk = Disk.getInstance();
-        Circle[][] disks = disk.getCircles();
+        Disks disks = Disks.getInstance();
 
-        int amount = disk.checkLowerLeft(name, coordinate);
+        int amount = disks.checkLowerLeft(name, coordinate);
         for (int i = 0, x2 = coordinate.x, y2 = coordinate.y; i < amount && x2 >= 0 && y2 < 8; i++, x2--, y2++) {
-            disks[x2][y2].setFill(name.getColor());
+            disks.getDisk(x2, y2).setFill(name.getColor());
         }
     }
 

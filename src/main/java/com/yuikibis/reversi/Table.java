@@ -7,7 +7,6 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.shape.Circle;
 import javafx.scene.shape.LineTo;
 import javafx.scene.shape.MoveTo;
 import javafx.scene.shape.Path;
@@ -64,13 +63,12 @@ public class Table {
         pane.setPadding(new Insets(panePaddingTop, panePaddingRight, panePaddingBottom, panePaddingLeft));
         pane.setGridLinesVisible(true);
 
-        Disk disk = Disk.getInstance();
-        Circle[][] disks = disk.getCircles();
-        for (int Col = 0; Col < 8; Col++) {
+        Disks disks = Disks.getInstance();
+        for (int col = 0; col < 8; col++) {
             for (int row = 0; row < 8; row++) {
-                pane.add(disks[Col][row], Col, row);
+                pane.add(disks.getDisk(col, row), col, row);
                 double diskMargin = 5.0;
-                GridPane.setMargin(disks[Col][row], new Insets(diskMargin, diskMargin, diskMargin, diskMargin));
+                GridPane.setMargin(disks.getDisk(col, row), new Insets(diskMargin, diskMargin, diskMargin, diskMargin));
             }
         }
 

@@ -8,7 +8,6 @@ import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 
 public class Main extends Application {
@@ -42,12 +41,11 @@ public class Main extends Application {
         //primaryStage.getIcons().add(new Image(getClass().getResourceAsStream("reversi.png")));
 
         // Diskを四枚回転
-        Disk disk = Disk.getInstance();
-        Circle[][] circles = disk.getCircles();
-        circles[3][3].setFill(Color.WHITE);
-        circles[4][4].setFill(Color.WHITE);
-        circles[3][4].setFill(Color.BLACK);
-        circles[4][3].setFill(Color.BLACK);
+        Disks disks = Disks.getInstance();
+        disks.getDisk(3, 3).setFill(Color.WHITE);
+        disks.getDisk(4, 4).setFill(Color.WHITE);
+        disks.getDisk(3, 4).setFill(Color.BLACK);
+        disks.getDisk(4, 3).setFill(Color.BLACK);
     }
 
     private MenuBar makeMenu() {
@@ -62,7 +60,7 @@ public class Main extends Application {
 
     private void resetGame() {
         Player.resetInstance();
-        Disk.resetDisk();
+        Disks.resetInstance();
         Table.resetTable();
 
         initGame();

@@ -7,11 +7,11 @@ import javafx.scene.shape.Circle;
 
 import java.util.Objects;
 
-public class Disk {
-    private static Disk disk;
+public class Disks {
+    private static Disks disks;
     private final Circle[][] circles = new Circle[8][8];
 
-    private Disk() {
+    private Disks() {
         double circleSize = 30;
 
         for (int col = 0; col < 8; col++) {
@@ -39,20 +39,19 @@ public class Disk {
         }
     }
 
-
-    public static Disk getInstance() {
-        if (Objects.isNull(disk)) {
-            resetDisk();
+    public static Disks getInstance() {
+        if (Objects.isNull(disks)) {
+            resetInstance();
         }
-        return disk;
+        return disks;
     }
 
-    public static void resetDisk() {
-        disk = new Disk();
+    public static void resetInstance() {
+        disks = new Disks();
     }
 
-    public Circle[][] getCircles() {
-        return circles;
+    public Circle getDisk(int x, int y) {
+        return circles[x][y];
     }
 
     public boolean checkHittable(Player.Name name) {
