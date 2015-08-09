@@ -7,10 +7,14 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.shape.*;
+import javafx.scene.shape.Circle;
+import javafx.scene.shape.LineTo;
+import javafx.scene.shape.MoveTo;
+import javafx.scene.shape.Path;
 import javafx.scene.text.Font;
 
 import java.util.Objects;
+import java.util.Optional;
 
 public class Table {
     private static Table table;
@@ -164,15 +168,20 @@ public class Table {
         double hBoxPaddingLeft = 465.0;
         hBox.setPadding(new Insets(hBoxPaddingTop, hBoxPaddingRight, hBoxPaddingBottom, hBoxPaddingLeft));
 
-        Player[] players = Player.getInstance();
         double itemPaddingTop = 10.0;
         double itemPaddingRight = 0.0;
         double itemPaddingBottom = 18.5;
         double itemPaddingLeft = 0.0;
 
         double fontSize = 25.0;
-        blackScore = makeLineLabel("黒：" + String.format("%02d", players[Player.Name.Black.getIndex()].getScore()), fontSize, itemPaddingTop, itemPaddingRight, itemPaddingBottom, itemPaddingLeft);
-        whiteScore = makeLineLabel(" 白：" + String.format("%02d", players[Player.Name.White.getIndex()].getScore()), fontSize, itemPaddingTop, itemPaddingRight, itemPaddingBottom, itemPaddingLeft);
+
+        Player blackPlayer = Player.getInstance(Player.Name.Black);
+        Optional<Player> oBlackPlayer = Optional.ofNullable(blackPlayer);
+        oBlackPlayer.ifPresent(player -> blackScore = makeLineLabel("黒：" + String.format("%02d", player.getScore()), fontSize, itemPaddingTop, itemPaddingRight, itemPaddingBottom, itemPaddingLeft));
+
+        Player whitePlayer = Player.getInstance(Player.Name.White);
+        Optional<Player> oWhitePlayer = Optional.ofNullable(whitePlayer);
+        oWhitePlayer.ifPresent(player -> whiteScore = makeLineLabel(" 白：" + String.format("%02d", player.getScore()), fontSize, itemPaddingTop, itemPaddingRight, itemPaddingBottom, itemPaddingLeft));
 
         hBox.getChildren().addAll(blackScore, whiteScore);
 
@@ -181,16 +190,20 @@ public class Table {
 
 
     public void setResult() {
-        String result;
-        Player[] players = Player.getInstance();
-        if (players[Player.Name.Black.getIndex()].getScore() > players[Player.Name.White.getIndex()].getScore()) {
-            result = players[Player.Name.Black.getIndex()].getName().toString();
-        } else if (players[Player.Name.Black.getIndex()].getScore() < players[Player.Name.White.getIndex()].getScore()) {
-            result = players[Player.Name.White.getIndex()].getName().toString();
-        } else {
-            result = "両";
-        }
-        Table.result.setText("「" + result + "」の勝ち");
+        Optional<Player> oBlackPlayer = Optional.ofNullable(Player.getInstance(Player.Name.Black));
+        Optional<Player> oWhitePlayer = Optional.ofNullable(Player.getInstance(Player.Name.White));
+        oBlackPlayer.ifPresent(blackPlayer -> oWhitePlayer.ifPresent(whitePlayer -> {
+            String result;
+            if (blackPlayer.getScore() > whitePlayer.getScore()) {
+                result = blackPlayer.getName().toString();
+            } else if (blackPlayer.getScore() < whitePlayer.getScore()) {
+                result = whitePlayer.getName().toString();
+            } else {
+                result = "両";
+            }
+            Table.result.setText("「" + result + "」の勝ち");
+        }));
+
     }
 
     public void setCurrentPlayerLabel(String msg) {

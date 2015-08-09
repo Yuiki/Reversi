@@ -4,8 +4,9 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 
 public class Player {
-    private static final Player[] players = new Player[2];
-    private static int current = 0;
+    private static Player blackPlayer = new Player(Name.Black);
+    private static Player whitePlayer = new Player(Name.White);
+    private static Player current = blackPlayer;
     private final Name name;
     private int score = 2; /*最初から二枚置いてあるため。*/
 
@@ -14,20 +15,14 @@ public class Player {
     }
 
     enum Name {
-        Black(0, "黒", Color.BLACK), White(1, "白", Color.WHITE);
+        Black("黒", Color.BLACK), White("白", Color.WHITE);
 
-        private final int index;
         private final Color color;
         private final String jpName;
 
-        Name(int index, String jpName, Color color) {
-            this.index = index;
+        Name(String jpName, Color color) {
             this.jpName = jpName;
             this.color = color;
-        }
-
-        public int getIndex() {
-            return this.index;
         }
 
         public Color getColor() {
@@ -40,48 +35,47 @@ public class Player {
         }
     }
 
-    public static Player[] getInstance() {
-        if (players[Name.Black.getIndex()] == null) {
-            players[Name.Black.getIndex()] = new Player(Name.Black);
-            players[Name.White.getIndex()] = new Player(Name.White);
+    public static Player getInstance(Name name) {
+        switch (name) {
+            case Black:
+                return blackPlayer;
+            case White:
+                return whitePlayer;
         }
-        return players;
+        return null;
     }
 
     public static void resetInstance() {
-        players[Name.Black.getIndex()] = null;
-        players[Name.White.getIndex()] = null;
-        current = 0;
-
-        getInstance();
+        blackPlayer = new Player(Name.Black);
+        whitePlayer = new Player(Name.White);
+        current = blackPlayer;
     }
 
     public static Player getCurrentPlayer() {
-        getInstance();
-        return players[current];
+        return current;
     }
 
     public static Player getNextPlayer() {
-        if (current == Name.Black.getIndex()) {
-            return players[Name.White.getIndex()];
+        if (current == blackPlayer) {
+            return whitePlayer;
         } else {
-            return players[Name.Black.getIndex()];
+            return blackPlayer;
         }
     }
 
     public static void next() {
-        if (current == Name.Black.getIndex()) {
-            current = Name.White.getIndex();
+        if (current == blackPlayer) {
+            current = whitePlayer;
         } else {
-            current = Name.Black.getIndex();
+            current = blackPlayer;
         }
 
         Disk disk = Disk.getInstance();
-        if (!disk.checkHittable(players[Player.current].getName())) {
-            if (current == Name.Black.getIndex()) {
-                current = Name.White.getIndex();
+        if (!disk.checkHittable(current.getName())) {
+            if (current == blackPlayer) {
+                current = whitePlayer;
             } else {
-                current = Name.Black.getIndex();
+                current = blackPlayer;
             }
         }
     }
@@ -141,10 +135,10 @@ public class Player {
 
         Table table = Table.getInstance();
         table.setCurrentPlayerLabel(Player.getCurrentPlayer().getName().toString());
-        table.setScoreLabel(Name.Black, players[Name.Black.getIndex()].getScore());
-        table.setScoreLabel(Name.White, players[Name.White.getIndex()].getScore());
+        table.setScoreLabel(Name.Black,blackPlayer.getScore());
+        table.setScoreLabel(Name.White, whitePlayer.getScore());
 
-        if (players[Name.Black.getIndex()].getScore() + players[Name.White.getIndex()].getScore() == 64) {
+        if (blackPlayer.getScore() + whitePlayer.getScore() == 64) {
             table.setResult();
         }
     }
