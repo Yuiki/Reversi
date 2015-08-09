@@ -126,8 +126,8 @@ public class Player {
         Disks disks = Disks.getInstance();
 
         int amount = disks.checkTop(name, coordinate);
-        for (int i = 0, x2 = coordinate.x, y2 = coordinate.y; i < amount && y2 >= 0; i++, y2--) {
-            disks.getDisk(x2, y2).setFill(name.getColor());
+        for (int i = 0, col = coordinate.col, row = coordinate.row; i < amount && row >= 0; i++, row--) {
+            disks.getDisk(col, row).setFill(name.getColor());
         }
     }
 
@@ -135,8 +135,8 @@ public class Player {
         Disks disks = Disks.getInstance();
 
         int amount = disks.checkBottom(name, coordinate);
-        for (int i = 0, x2 = coordinate.x, y2 = coordinate.y; i < amount && y2 < 8; i++, y2++) {
-            disks.getDisk(x2, y2).setFill(name.getColor());
+        for (int i = 0, col = coordinate.col, row = coordinate.row; i < amount && row < 8; i++, row++) {
+            disks.getDisk(col, row).setFill(name.getColor());
         }
     }
 
@@ -144,8 +144,8 @@ public class Player {
         Disks disks = Disks.getInstance();
 
         int amount = disks.checkRight(name, coordinate);
-        for (int i = 0, x2 = coordinate.x, y2 = coordinate.y; i < amount && x2 < 8; i++, x2++) {
-            disks.getDisk(x2, y2).setFill(name.getColor());
+        for (int i = 0, col = coordinate.col, row = coordinate.row; i < amount && col < 8; i++, col++) {
+            disks.getDisk(col, row).setFill(name.getColor());
         }
     }
 
@@ -153,8 +153,8 @@ public class Player {
         Disks disks = Disks.getInstance();
 
         int amount = disks.checkLeft(name, coordinate);
-        for (int i = 0, x2 = coordinate.x, y2 = coordinate.y; i < amount && x2 >= 0; i++, x2--) {
-            disks.getDisk(x2, y2).setFill(name.getColor());
+        for (int i = 0, col = coordinate.col, row = coordinate.row; i < amount && col >= 0; i++, col--) {
+            disks.getDisk(col, row).setFill(name.getColor());
         }
     }
 
@@ -162,8 +162,8 @@ public class Player {
         Disks disks = Disks.getInstance();
 
         int amount = disks.checkUpperRight(name, coordinate);
-        for (int i = 0, x2 = coordinate.x, y2 = coordinate.y; i < amount && x2 < 8 && y2 >= 0; i++, x2++, y2--) {
-            disks.getDisk(x2, y2).setFill(name.getColor());
+        for (int i = 0, col = coordinate.col, row = coordinate.row; i < amount && col < 8 && row >= 0; i++, col++, row--) {
+            disks.getDisk(col, row).setFill(name.getColor());
         }
     }
 
@@ -171,8 +171,8 @@ public class Player {
         Disks disks = Disks.getInstance();
 
         int amount = disks.checkUpperLeft(name, coordinate);
-        for (int i = 0, x2 = coordinate.x, y2 = coordinate.y; i < amount && x2 >= 0 && y2 >= 0; i++, x2--, y2--) {
-            disks.getDisk(x2, y2).setFill(name.getColor());
+        for (int i = 0, col = coordinate.col, row = coordinate.row; i < amount && col >= 0 && row >= 0; i++, col--, row--) {
+            disks.getDisk(col, row).setFill(name.getColor());
         }
     }
 
@@ -180,8 +180,8 @@ public class Player {
         Disks disks = Disks.getInstance();
 
         int amount = disks.checkLowerRight(name, coordinate);
-        for (int i = 0, x2 = coordinate.x, y2 = coordinate.y; i < amount && x2 < 8 && y2 < 8; i++, x2++, y2++) {
-            disks.getDisk(x2, y2).setFill(name.getColor());
+        for (int i = 0, col = coordinate.col, row = coordinate.row; i < amount && col < 8 && row < 8; i++, col++, row++) {
+            disks.getDisk(col, row).setFill(name.getColor());
         }
     }
 
@@ -189,8 +189,8 @@ public class Player {
         Disks disks = Disks.getInstance();
 
         int amount = disks.checkLowerLeft(name, coordinate);
-        for (int i = 0, x2 = coordinate.x, y2 = coordinate.y; i < amount && x2 >= 0 && y2 < 8; i++, x2--, y2++) {
-            disks.getDisk(x2, y2).setFill(name.getColor());
+        for (int i = 0, col = coordinate.col, row = coordinate.row; i < amount && col >= 0 && row < 8; i++, col--, row++) {
+            disks.getDisk(col, row).setFill(name.getColor());
         }
     }
 

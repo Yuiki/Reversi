@@ -1,11 +1,11 @@
 package com.yuikibis.reversi;
 
 class Coordinate {
-    public final int x;
-    public final int y;
+    public final int col;
+    public final int row;
 
-    Coordinate(int x, int y) {
-        this.x = x;
-        this.y = y;
+    Coordinate(int col, int row) {
+        this.col = col;
+        this.row = row;
     }
 }

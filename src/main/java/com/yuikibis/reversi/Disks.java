@@ -32,9 +32,9 @@ public class Disks {
 
                         Player currentPlayer = Player.getCurrentPlayer();
 
-                        int x = GridPane.getColumnIndex(circle);
-                        int y = GridPane.getRowIndex(circle);
-                        Coordinate coordinate = new Coordinate(x, y);
+                        int clickedCol = GridPane.getColumnIndex(circle);
+                        int clickedRow = GridPane.getRowIndex(circle);
+                        Coordinate coordinate = new Coordinate(clickedCol, clickedRow);
 
                         currentPlayer.reverse(coordinate);
                     }
@@ -54,9 +54,8 @@ public class Disks {
         disks = new Disks();
     }
 
-    public Circle getDisk(int x, int y) {
-        //return listOfList.get(x).get(y);
-        return listOfList.get(x).get(y);
+    public Circle getDisk(int col, int row) {
+        return listOfList.get(col).get(row);
     }
 
     public boolean checkHittable(Player.Name name) {
@@ -89,23 +88,23 @@ public class Disks {
     }
 
     public int checkTop(Player.Name color, Coordinate coordinate) {
-        int x = coordinate.x;
-        int y = coordinate.y;
+        int col = coordinate.col;
+        int row = coordinate.row;
 
-        for (y--; y >= 0; y--) {
-            if (listOfList.get(x).get(y).getFill() == Color.TRANSPARENT) {
+        for (row--; row >= 0; row--) {
+            if (listOfList.get(col).get(row).getFill() == Color.TRANSPARENT) {
                 return 0;
             }
-            if (listOfList.get(x).get(y).getFill() == color.getColor()) {
+            if (listOfList.get(col).get(row).getFill() == color.getColor()) {
                 break;
             }
         }
 
-        if (y == -1) {
+        if (row == -1) {
             return 0;
         }
 
-        int amount = Math.abs(y - coordinate.y);
+        int amount = Math.abs(row - coordinate.row);
         if (amount > 1) {
             return amount;
         }
@@ -113,23 +112,23 @@ public class Disks {
     }
 
     public int checkBottom(Player.Name color, Coordinate coordinate) {
-        int x = coordinate.x;
-        int y = coordinate.y;
+        int col = coordinate.col;
+        int row = coordinate.row;
 
-        for (y++; y < 8; y++) {
-            if (listOfList.get(x).get(y).getFill() == Color.TRANSPARENT) {
+        for (row++; row < 8; row++) {
+            if (listOfList.get(col).get(row).getFill() == Color.TRANSPARENT) {
                 return 0;
             }
-            if (listOfList.get(x).get(y).getFill() == color.getColor()) {
+            if (listOfList.get(col).get(row).getFill() == color.getColor()) {
                 break;
             }
         }
 
-        if (y == 8) {
+        if (row == 8) {
             return 0;
         }
 
-        int amount = Math.abs(y - coordinate.y);
+        int amount = Math.abs(row - coordinate.row);
         if (amount > 1) {
             return amount;
         }
@@ -137,23 +136,23 @@ public class Disks {
     }
 
     public int checkRight(Player.Name color, Coordinate coordinate) {
-        int x = coordinate.x;
-        int y = coordinate.y;
+        int col = coordinate.col;
+        int row = coordinate.row;
 
-        for (x++; x < 8; x++) {
-            if (listOfList.get(x).get(y).getFill() == Color.TRANSPARENT) {
+        for (col++; col < 8; col++) {
+            if (listOfList.get(col).get(row).getFill() == Color.TRANSPARENT) {
                 return 0;
             }
-            if (listOfList.get(x).get(y).getFill() == color.getColor()) {
+            if (listOfList.get(col).get(row).getFill() == color.getColor()) {
                 break;
             }
         }
 
-        if (x == 8) {
+        if (col == 8) {
             return 0;
         }
 
-        int amount = Math.abs(x - coordinate.x);
+        int amount = Math.abs(col - coordinate.col);
         if (amount > 1) {
             return amount;
         }
@@ -161,23 +160,23 @@ public class Disks {
     }
 
     public int checkLeft(Player.Name color, Coordinate coordinate) {
-        int x = coordinate.x;
-        int y = coordinate.y;
+        int col = coordinate.col;
+        int row = coordinate.row;
 
-        for (x--; x >= 0; x--) {
-            if (listOfList.get(x).get(y).getFill() == Color.TRANSPARENT) {
+        for (col--; col >= 0; col--) {
+            if (listOfList.get(col).get(row).getFill() == Color.TRANSPARENT) {
                 return 0;
             }
-            if (listOfList.get(x).get(y).getFill() == color.getColor()) {
+            if (listOfList.get(col).get(row).getFill() == color.getColor()) {
                 break;
             }
         }
 
-        if (x == -1) {
+        if (col == -1) {
             return 0;
         }
 
-        int amount = Math.abs(x - coordinate.x);
+        int amount = Math.abs(col - coordinate.col);
         if (amount > 1) {
             return amount;
         }
@@ -185,23 +184,23 @@ public class Disks {
     }
 
     public int checkUpperRight(Player.Name color, Coordinate coordinate) {
-        int x = coordinate.x;
-        int y = coordinate.y;
+        int col = coordinate.col;
+        int row = coordinate.row;
 
-        for (x++, y--; x < 8 && y >= 0; x++, y--) {
-            if (listOfList.get(x).get(y).getFill() == Color.TRANSPARENT) {
+        for (col++, row--; col < 8 && row >= 0; col++, row--) {
+            if (listOfList.get(col).get(row).getFill() == Color.TRANSPARENT) {
                 return 0;
             }
-            if (listOfList.get(x).get(y).getFill() == color.getColor()) {
+            if (listOfList.get(col).get(row).getFill() == color.getColor()) {
                 break;
             }
         }
 
-        if (x == 8 || y == -1) {
+        if (col == 8 || row == -1) {
             return 0;
         }
 
-        int amount = Math.abs(y - coordinate.y);
+        int amount = Math.abs(row - coordinate.row);
         if (amount > 1) {
             return amount;
         }
@@ -209,23 +208,23 @@ public class Disks {
     }
 
     public int checkUpperLeft(Player.Name color, Coordinate coordinate) {
-        int x = coordinate.x;
-        int y = coordinate.y;
+        int col = coordinate.col;
+        int row = coordinate.row;
 
-        for (x--, y--; x >= 0 && y >= 0; x--, y--) {
-            if (listOfList.get(x).get(y).getFill() == Color.TRANSPARENT) {
+        for (col--, row--; col >= 0 && row >= 0; col--, row--) {
+            if (listOfList.get(col).get(row).getFill() == Color.TRANSPARENT) {
                 return 0;
             }
-            if (listOfList.get(x).get(y).getFill() == color.getColor()) {
+            if (listOfList.get(col).get(row).getFill() == color.getColor()) {
                 break;
             }
         }
 
-        if (x == -1 || y == -1) {
+        if (col == -1 || row == -1) {
             return 0;
         }
 
-        int amount = Math.abs(y - coordinate.y);
+        int amount = Math.abs(row - coordinate.row);
         if (amount > 1) {
             return amount;
         }
@@ -233,23 +232,23 @@ public class Disks {
     }
 
     public int checkLowerRight(Player.Name color, Coordinate coordinate) {
-        int x = coordinate.x;
-        int y = coordinate.y;
+        int col = coordinate.col;
+        int row = coordinate.row;
 
-        for (x++, y++; x < 8 && y < 8; x++, y++) {
-            if (listOfList.get(x).get(y).getFill() == Color.TRANSPARENT) {
+        for (col++, row++; col < 8 && row < 8; col++, row++) {
+            if (listOfList.get(col).get(row).getFill() == Color.TRANSPARENT) {
                 return 0;
             }
-            if (listOfList.get(x).get(y).getFill() == color.getColor()) {
+            if (listOfList.get(col).get(row).getFill() == color.getColor()) {
                 break;
             }
         }
 
-        if (x == 8 || y == 8) {
+        if (col == 8 || row == 8) {
             return 0;
         }
 
-        int amount = Math.abs(y - coordinate.y);
+        int amount = Math.abs(row - coordinate.row);
         if (amount > 1) {
             return amount;
         }
@@ -257,23 +256,23 @@ public class Disks {
     }
 
     public int checkLowerLeft(Player.Name color, Coordinate coordinate) {
-        int x = coordinate.x;
-        int y = coordinate.y;
+        int col = coordinate.col;
+        int row = coordinate.row;
 
-        for (x--, y++; x >= 0 && y < 8; x--, y++) {
-            if (listOfList.get(x).get(y).getFill() == Color.TRANSPARENT) {
+        for (col--, row++; col >= 0 && row < 8; col--, row++) {
+            if (listOfList.get(col).get(row).getFill() == Color.TRANSPARENT) {
                 return 0;
             }
-            if (listOfList.get(x).get(y).getFill() == color.getColor()) {
+            if (listOfList.get(col).get(row).getFill() == color.getColor()) {
                 break;
             }
         }
 
-        if (x == -1 || y == 8) {
+        if (col == -1 || row == 8) {
             return 0;
         }
 
-        int amount = Math.abs(y - coordinate.y);
+        int amount = Math.abs(row - coordinate.row);
         if (amount > 1) {
             return amount;
         }
