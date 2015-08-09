@@ -154,7 +154,7 @@ public class Player {
         Circle[][] disks = disk.getCircles();
 
         int amount = disk.checkTop(name, coordinate);
-        for (int i = 0, x2 = coordinate.getX(), y2 = coordinate.getY(); i < amount && y2 >= 0; i++, y2--) {
+        for (int i = 0, x2 = coordinate.x, y2 = coordinate.y; i < amount && y2 >= 0; i++, y2--) {
             disks[x2][y2].setFill(name.getColor());
         }
 
@@ -166,7 +166,7 @@ public class Player {
         Circle[][] disks = disk.getCircles();
 
         int amount = disk.checkBottom(name, coordinate);
-        for (int i = 0, x2 = coordinate.getX(), y2 = coordinate.getY(); i < amount && y2 < 8; i++, y2++) {
+        for (int i = 0, x2 = coordinate.x, y2 = coordinate.y; i < amount && y2 < 8; i++, y2++) {
             disks[x2][y2].setFill(name.getColor());
         }
 
@@ -178,7 +178,7 @@ public class Player {
         Circle[][] disks = disk.getCircles();
 
         int amount = disk.checkRight(name, coordinate);
-        for (int i = 0, x2 = coordinate.getX(), y2 = coordinate.getY(); i < amount && x2 < 8; i++, x2++) {
+        for (int i = 0, x2 = coordinate.x, y2 = coordinate.y; i < amount && x2 < 8; i++, x2++) {
             disks[x2][y2].setFill(name.getColor());
         }
 
@@ -190,7 +190,7 @@ public class Player {
         Circle[][] disks = disk.getCircles();
 
         int amount = disk.checkLeft(name, coordinate);
-        for (int i = 0, x2 = coordinate.getX(), y2 = coordinate.getY(); i < amount && x2 >= 0; i++, x2--) {
+        for (int i = 0, x2 = coordinate.x, y2 = coordinate.y; i < amount && x2 >= 0; i++, x2--) {
             disks[x2][y2].setFill(name.getColor());
         }
 
@@ -202,7 +202,7 @@ public class Player {
         Circle[][] disks = disk.getCircles();
 
         int amount = disk.checkUpperRight(name, coordinate);
-        for (int i = 0, x2 = coordinate.getX(), y2 = coordinate.getY(); i < amount && x2 < 8 && y2 >= 0; i++, x2++, y2--) {
+        for (int i = 0, x2 = coordinate.x, y2 = coordinate.y; i < amount && x2 < 8 && y2 >= 0; i++, x2++, y2--) {
             disks[x2][y2].setFill(name.getColor());
         }
 
@@ -214,7 +214,7 @@ public class Player {
         Circle[][] disks = disk.getCircles();
 
         int amount = disk.checkUpperLeft(name, coordinate);
-        for (int i = 0, x2 = coordinate.getX(), y2 = coordinate.getY(); i < amount && x2 >= 0 && y2 >= 0; i++, x2--, y2--) {
+        for (int i = 0, x2 = coordinate.x, y2 = coordinate.y; i < amount && x2 >= 0 && y2 >= 0; i++, x2--, y2--) {
             disks[x2][y2].setFill(name.getColor());
         }
 
@@ -226,7 +226,7 @@ public class Player {
         Circle[][] disks = disk.getCircles();
 
         int amount = disk.checkLowerRight(name, coordinate);
-        for (int i = 0, x2 = coordinate.getX(), y2 = coordinate.getY(); i < amount && x2 < 8 && y2 < 8; i++, x2++, y2++) {
+        for (int i = 0, x2 = coordinate.x, y2 = coordinate.y; i < amount && x2 < 8 && y2 < 8; i++, x2++, y2++) {
             disks[x2][y2].setFill(name.getColor());
         }
 
@@ -238,7 +238,7 @@ public class Player {
         Circle[][] disks = disk.getCircles();
 
         int amount = disk.checkLowerLeft(name, coordinate);
-        for (int i = 0, x2 = coordinate.getX(), y2 = coordinate.getY(); i < amount && x2 >= 0 && y2 < 8; i++, x2--, y2++) {
+        for (int i = 0, x2 = coordinate.x, y2 = coordinate.y; i < amount && x2 >= 0 && y2 < 8; i++, x2--, y2++) {
             disks[x2][y2].setFill(name.getColor());
         }
 

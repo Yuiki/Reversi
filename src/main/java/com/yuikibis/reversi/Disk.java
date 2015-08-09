@@ -82,8 +82,8 @@ public class Disk {
     }
 
     public int checkTop(Player.Name color, Coordinate coordinate) {
-        int x = coordinate.getX();
-        int y = coordinate.getY();
+        int x = coordinate.x;
+        int y = coordinate.y;
 
         for (y--; y >= 0; y--) {
             if (circles[x][y].getFill() == Color.TRANSPARENT) {
@@ -98,7 +98,7 @@ public class Disk {
             return 0;
         }
 
-        int amount = Math.abs(y - coordinate.getY());
+        int amount = Math.abs(y - coordinate.y);
         if (amount > 1) {
             return amount;
         }
@@ -106,8 +106,8 @@ public class Disk {
     }
 
     public int checkBottom(Player.Name color, Coordinate coordinate) {
-        int x = coordinate.getX();
-        int y = coordinate.getY();
+        int x = coordinate.x;
+        int y = coordinate.y;
 
         for (y++; y < 8; y++) {
             if (circles[x][y].getFill() == Color.TRANSPARENT) {
@@ -122,7 +122,7 @@ public class Disk {
             return 0;
         }
 
-        int amount = Math.abs(y - coordinate.getY());
+        int amount = Math.abs(y - coordinate.y);
         if (amount > 1) {
             return amount;
         }
@@ -130,8 +130,8 @@ public class Disk {
     }
 
     public int checkRight(Player.Name color, Coordinate coordinate) {
-        int x = coordinate.getX();
-        int y = coordinate.getY();
+        int x = coordinate.x;
+        int y = coordinate.y;
 
         for (x++; x < 8; x++) {
             if (circles[x][y].getFill() == Color.TRANSPARENT) {
@@ -146,7 +146,7 @@ public class Disk {
             return 0;
         }
 
-        int amount = Math.abs(x - coordinate.getX());
+        int amount = Math.abs(x - coordinate.x);
         if (amount > 1) {
             return amount;
         }
@@ -154,8 +154,8 @@ public class Disk {
     }
 
     public int checkLeft(Player.Name color, Coordinate coordinate) {
-        int x = coordinate.getX();
-        int y = coordinate.getY();
+        int x = coordinate.x;
+        int y = coordinate.y;
 
         for (x--; x >= 0; x--) {
             if (circles[x][y].getFill() == Color.TRANSPARENT) {
@@ -170,7 +170,7 @@ public class Disk {
             return 0;
         }
 
-        int amount = Math.abs(x - coordinate.getX());
+        int amount = Math.abs(x - coordinate.x);
         if (amount > 1) {
             return amount;
         }
@@ -178,8 +178,8 @@ public class Disk {
     }
 
     public int checkUpperRight(Player.Name color, Coordinate coordinate) {
-        int x = coordinate.getX();
-        int y = coordinate.getY();
+        int x = coordinate.x;
+        int y = coordinate.y;
 
         for (x++, y--; x < 8 && y >= 0; x++, y--) {
             if (circles[x][y].getFill() == Color.TRANSPARENT) {
@@ -194,7 +194,7 @@ public class Disk {
             return 0;
         }
 
-        int amount = Math.abs(y - coordinate.getY());
+        int amount = Math.abs(y - coordinate.y);
         if (amount > 1) {
             return amount;
         }
@@ -202,8 +202,8 @@ public class Disk {
     }
 
     public int checkUpperLeft(Player.Name color, Coordinate coordinate) {
-        int x = coordinate.getX();
-        int y = coordinate.getY();
+        int x = coordinate.x;
+        int y = coordinate.y;
 
         for (x--, y--; x >= 0 && y >= 0; x--, y--) {
             if (circles[x][y].getFill() == Color.TRANSPARENT) {
@@ -218,7 +218,7 @@ public class Disk {
             return 0;
         }
 
-        int amount = Math.abs(y - coordinate.getY());
+        int amount = Math.abs(y - coordinate.y);
         if (amount > 1) {
             return amount;
         }
@@ -226,8 +226,8 @@ public class Disk {
     }
 
     public int checkLowerRight(Player.Name color, Coordinate coordinate) {
-        int x = coordinate.getX();
-        int y = coordinate.getY();
+        int x = coordinate.x;
+        int y = coordinate.y;
 
         for (x++, y++; x < 8 && y < 8; x++, y++) {
             if (circles[x][y].getFill() == Color.TRANSPARENT) {
@@ -242,7 +242,7 @@ public class Disk {
             return 0;
         }
 
-        int amount = Math.abs(y - coordinate.getY());
+        int amount = Math.abs(y - coordinate.y);
         if (amount > 1) {
             return amount;
         }
@@ -250,8 +250,8 @@ public class Disk {
     }
 
     public int checkLowerLeft(Player.Name color, Coordinate coordinate) {
-        int x = coordinate.getX();
-        int y = coordinate.getY();
+        int x = coordinate.x;
+        int y = coordinate.y;
 
         for (x--, y++; x >= 0 && y < 8; x--, y++) {
             if (circles[x][y].getFill() == Color.TRANSPARENT) {
@@ -266,7 +266,7 @@ public class Disk {
             return 0;
         }
 
-        int amount = Math.abs(y - coordinate.getY());
+        int amount = Math.abs(y - coordinate.y);
         if (amount > 1) {
             return amount;
         }
