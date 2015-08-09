@@ -66,11 +66,11 @@ public class Table {
 
         Disk disk = Disk.getInstance();
         Circle[][] disks = disk.getCircles();
-        for (int row = 0; row < 8; row++) {
-            for (int col = 0; col < 8; col++) {
-                pane.add(disks[row][col], row, col);
+        for (int Col = 0; Col < 8; Col++) {
+            for (int row = 0; row < 8; row++) {
+                pane.add(disks[Col][row], Col, row);
                 double diskMargin = 5.0;
-                GridPane.setMargin(disks[row][col], new Insets(diskMargin, diskMargin, diskMargin, diskMargin));
+                GridPane.setMargin(disks[Col][row], new Insets(diskMargin, diskMargin, diskMargin, diskMargin));
             }
         }
 

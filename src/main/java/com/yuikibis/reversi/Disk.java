@@ -14,11 +14,11 @@ public class Disk {
     private Disk() {
         double circleSize = 30;
 
-        for (int row = 0; row < 8; row++) {
-            for (int col = 0; col < 8; col++) {
+        for (int col = 0; col < 8; col++) {
+            for (int row = 0; row < 8; row++) {
                 Circle circle = new Circle(circleSize);
-                circles[row][col] = circle;
-                circles[row][col].setFill(Color.TRANSPARENT);
+                circles[col][row] = circle;
+                circles[col][row].setFill(Color.TRANSPARENT);
 
                 circle.setOnMouseClicked(event -> {
                     if (event.getButton().equals(MouseButton.PRIMARY)) {
@@ -56,12 +56,12 @@ public class Disk {
     }
 
     public boolean checkHittable(Player.Name name) {
-        for (int row = 0; row < 8; row++) {
-            for (int col = 0; col < 8; col++) {
-                Coordinate coordinate = new Coordinate(row, col);
+        for (int col = 0; col < 8; col++) {
+            for (int row = 0; row < 8; row++) {
+                Coordinate coordinate = new Coordinate(col, row);
 
                 // Diskが置いてあるところは無視。
-                if (circles[row][col].getFill() != Color.TRANSPARENT) {
+                if (circles[col][row].getFill() != Color.TRANSPARENT) {
                     continue;
                 }
 
