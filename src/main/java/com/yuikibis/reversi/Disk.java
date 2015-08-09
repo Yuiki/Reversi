@@ -42,14 +42,13 @@ public class Disk {
 
     public static Disk getInstance() {
         if (Objects.isNull(disk)) {
-            disk = new Disk();
+            resetDisk();
         }
         return disk;
     }
 
     public static void resetDisk() {
-        disk = null;
-        getInstance();
+        disk = new Disk();
     }
 
     public Circle[][] getCircles() {
