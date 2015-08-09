@@ -70,7 +70,7 @@ public class Disk {
                         || checkBottom(name, coordinate) > 0
                         || checkLeft(name, coordinate) > 0
                         || checkUpperRight(name, coordinate) > 0
-                        || checkUpperRight(name, coordinate) > 0
+                        || checkUpperLeft(name, coordinate) > 0
                         || checkLowerRight(name, coordinate) > 0
                         || checkLowerLeft(name, coordinate) > 0) {
                     return true;
