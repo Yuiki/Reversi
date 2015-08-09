@@ -65,19 +65,23 @@ public class Disk {
                     continue;
                 }
 
-                if (checkTop(name, coordinate) > 0
-                        || checkRight(name, coordinate) > 0
-                        || checkBottom(name, coordinate) > 0
-                        || checkLeft(name, coordinate) > 0
-                        || checkUpperRight(name, coordinate) > 0
-                        || checkUpperLeft(name, coordinate) > 0
-                        || checkLowerRight(name, coordinate) > 0
-                        || checkLowerLeft(name, coordinate) > 0) {
+                if (checkAround(name, coordinate)) {
                     return true;
                 }
             }
         }
         return false;
+    }
+
+    public boolean checkAround(Player.Name name, Coordinate coordinate) {
+        return checkTop(name, coordinate) > 0
+                || checkRight(name, coordinate) > 0
+                || checkBottom(name, coordinate) > 0
+                || checkLeft(name, coordinate) > 0
+                || checkUpperRight(name, coordinate) > 0
+                || checkUpperLeft(name, coordinate) > 0
+                || checkLowerRight(name, coordinate) > 0
+                || checkLowerLeft(name, coordinate) > 0;
     }
 
     public int checkTop(Player.Name color, Coordinate coordinate) {
