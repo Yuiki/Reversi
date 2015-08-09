@@ -5,20 +5,24 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class Disks {
     private static Disks disks;
-    private final Circle[][] circles = new Circle[8][8];
+    List<List<Circle>> listOfList = new ArrayList<>();
 
     private Disks() {
         double circleSize = 30;
 
         for (int col = 0; col < 8; col++) {
+            List<Circle> list = new ArrayList<>();
+            listOfList.add(list);
             for (int row = 0; row < 8; row++) {
                 Circle circle = new Circle(circleSize);
-                circles[col][row] = circle;
-                circles[col][row].setFill(Color.TRANSPARENT);
+                circle.setFill(Color.TRANSPARENT);
+                list.add(circle);
 
                 circle.setOnMouseClicked(event -> {
                     if (event.getButton().equals(MouseButton.PRIMARY)) {
@@ -51,7 +55,8 @@ public class Disks {
     }
 
     public Circle getDisk(int x, int y) {
-        return circles[x][y];
+        //return listOfList.get(x).get(y);
+        return listOfList.get(x).get(y);
     }
 
     public boolean checkHittable(Player.Name name) {
@@ -60,7 +65,7 @@ public class Disks {
                 Coordinate coordinate = new Coordinate(col, row);
 
                 // Diskが置いてあるところは無視。
-                if (circles[col][row].getFill() != Color.TRANSPARENT) {
+                if (listOfList.get(col).get(row).getFill() != Color.TRANSPARENT) {
                     continue;
                 }
 
@@ -88,10 +93,10 @@ public class Disks {
         int y = coordinate.y;
 
         for (y--; y >= 0; y--) {
-            if (circles[x][y].getFill() == Color.TRANSPARENT) {
+            if (listOfList.get(x).get(y).getFill() == Color.TRANSPARENT) {
                 return 0;
             }
-            if (circles[x][y].getFill() == color.getColor()) {
+            if (listOfList.get(x).get(y).getFill() == color.getColor()) {
                 break;
             }
         }
@@ -112,10 +117,10 @@ public class Disks {
         int y = coordinate.y;
 
         for (y++; y < 8; y++) {
-            if (circles[x][y].getFill() == Color.TRANSPARENT) {
+            if (listOfList.get(x).get(y).getFill() == Color.TRANSPARENT) {
                 return 0;
             }
-            if (circles[x][y].getFill() == color.getColor()) {
+            if (listOfList.get(x).get(y).getFill() == color.getColor()) {
                 break;
             }
         }
@@ -136,10 +141,10 @@ public class Disks {
         int y = coordinate.y;
 
         for (x++; x < 8; x++) {
-            if (circles[x][y].getFill() == Color.TRANSPARENT) {
+            if (listOfList.get(x).get(y).getFill() == Color.TRANSPARENT) {
                 return 0;
             }
-            if (circles[x][y].getFill() == color.getColor()) {
+            if (listOfList.get(x).get(y).getFill() == color.getColor()) {
                 break;
             }
         }
@@ -160,10 +165,10 @@ public class Disks {
         int y = coordinate.y;
 
         for (x--; x >= 0; x--) {
-            if (circles[x][y].getFill() == Color.TRANSPARENT) {
+            if (listOfList.get(x).get(y).getFill() == Color.TRANSPARENT) {
                 return 0;
             }
-            if (circles[x][y].getFill() == color.getColor()) {
+            if (listOfList.get(x).get(y).getFill() == color.getColor()) {
                 break;
             }
         }
@@ -184,10 +189,10 @@ public class Disks {
         int y = coordinate.y;
 
         for (x++, y--; x < 8 && y >= 0; x++, y--) {
-            if (circles[x][y].getFill() == Color.TRANSPARENT) {
+            if (listOfList.get(x).get(y).getFill() == Color.TRANSPARENT) {
                 return 0;
             }
-            if (circles[x][y].getFill() == color.getColor()) {
+            if (listOfList.get(x).get(y).getFill() == color.getColor()) {
                 break;
             }
         }
@@ -208,10 +213,10 @@ public class Disks {
         int y = coordinate.y;
 
         for (x--, y--; x >= 0 && y >= 0; x--, y--) {
-            if (circles[x][y].getFill() == Color.TRANSPARENT) {
+            if (listOfList.get(x).get(y).getFill() == Color.TRANSPARENT) {
                 return 0;
             }
-            if (circles[x][y].getFill() == color.getColor()) {
+            if (listOfList.get(x).get(y).getFill() == color.getColor()) {
                 break;
             }
         }
@@ -232,10 +237,10 @@ public class Disks {
         int y = coordinate.y;
 
         for (x++, y++; x < 8 && y < 8; x++, y++) {
-            if (circles[x][y].getFill() == Color.TRANSPARENT) {
+            if (listOfList.get(x).get(y).getFill() == Color.TRANSPARENT) {
                 return 0;
             }
-            if (circles[x][y].getFill() == color.getColor()) {
+            if (listOfList.get(x).get(y).getFill() == color.getColor()) {
                 break;
             }
         }
@@ -256,10 +261,10 @@ public class Disks {
         int y = coordinate.y;
 
         for (x--, y++; x >= 0 && y < 8; x--, y++) {
-            if (circles[x][y].getFill() == Color.TRANSPARENT) {
+            if (listOfList.get(x).get(y).getFill() == Color.TRANSPARENT) {
                 return 0;
             }
-            if (circles[x][y].getFill() == color.getColor()) {
+            if (listOfList.get(x).get(y).getFill() == color.getColor()) {
                 break;
             }
         }
