@@ -16,7 +16,7 @@ public class Disks {
     private final List<List<Rectangle>> listOfCollisionDetectionItemList = new ArrayList<>();
 
     private Disks() {
-        double diskSize = 30;
+        double diskRadius = 30;
 
         for (int col = 0; col < 8; col++) {
             List<Circle> diskList = new ArrayList<>();
@@ -25,12 +25,13 @@ public class Disks {
             listOfDiskList.add(diskList);
             this.listOfCollisionDetectionItemList.add(collisionDetectionItemList);
             for (int row = 0; row < 8; row++) {
-                Circle disk = new Circle(diskSize);
+                Circle disk = new Circle(diskRadius);
                 disk.setFill(Color.TRANSPARENT);
                 diskList.add(disk);
 
                 // 当たり判定用の四角
-                Rectangle collisionDetectionItem = new Rectangle(70, 70);
+                double collisionDetectionItemSize = Table.diskMargin * 2 + diskRadius * 2;
+                Rectangle collisionDetectionItem = new Rectangle(collisionDetectionItemSize, collisionDetectionItemSize);
                 collisionDetectionItem.setFill(Color.TRANSPARENT);
                 collisionDetectionItemList.add(collisionDetectionItem);
 

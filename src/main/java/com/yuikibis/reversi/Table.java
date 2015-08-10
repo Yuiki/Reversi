@@ -24,6 +24,8 @@ public class Table {
     private Label whiteScoreLabel;
     private Label resultLabel;
 
+    public static final double diskMargin = 5.0;
+
     private Table() {
         root.getChildren().addAll(makePane(), makeHorizontalLine(), makeVerticalLine(), makeCurrentTurn(), makeScoreLine(), makeBoarder(), makeResult());
     }
@@ -59,7 +61,6 @@ public class Table {
         pane.setGridLinesVisible(true);
 
         Disks disks = Disks.getInstance();
-        double diskMargin = 5.0;
         for (int col = 0; col < 8; col++) {
             for (int row = 0; row < 8; row++) {
                 pane.add(disks.getDisk(col, row), col, row);
