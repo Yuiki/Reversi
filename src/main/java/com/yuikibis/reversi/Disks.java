@@ -20,20 +20,20 @@ public class Disks {
             List<Circle> list = new ArrayList<>();
             listOfList.add(list);
             for (int row = 0; row < 8; row++) {
-                Circle circle = new Circle(circleSize);
-                circle.setFill(Color.TRANSPARENT);
-                list.add(circle);
+                Circle disk = new Circle(circleSize);
+                disk.setFill(Color.TRANSPARENT);
+                list.add(disk);
 
-                circle.setOnMouseClicked(event -> {
+                disk.setOnMouseClicked(event -> {
                     if (event.getButton().equals(MouseButton.PRIMARY)) {
-                        if (circle.getFill() != Color.TRANSPARENT) {
+                        if (disk.getFill() != Color.TRANSPARENT) {
                             return;
                         }
 
                         Player currentPlayer = Player.getCurrentPlayer();
 
-                        int clickedCol = GridPane.getColumnIndex(circle);
-                        int clickedRow = GridPane.getRowIndex(circle);
+                        int clickedCol = GridPane.getColumnIndex(disk);
+                        int clickedRow = GridPane.getRowIndex(disk);
                         Coordinate coordinate = new Coordinate(clickedCol, clickedRow);
 
                         currentPlayer.reverse(coordinate);
