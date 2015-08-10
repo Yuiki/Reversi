@@ -5,7 +5,7 @@ import javafx.scene.paint.Color;
 public class Player {
     private static Player blackPlayer = new Player(Name.Black);
     private static Player whitePlayer = new Player(Name.White);
-    private static Player current = blackPlayer;
+    private static Player currentPlayer = blackPlayer;
     private final Name name;
     private int score = 2; /*最初から二枚置いてあるため。*/
 
@@ -47,26 +47,27 @@ public class Player {
     public static void resetInstance() {
         blackPlayer = new Player(Name.Black);
         whitePlayer = new Player(Name.White);
-        current = blackPlayer;
+        currentPlayer = blackPlayer;
     }
 
     public static Player getCurrentPlayer() {
-        return current;
+        return currentPlayer;
     }
 
     private static void next() {
-        if (current == blackPlayer) {
-            current = whitePlayer;
+        if (currentPlayer == blackPlayer) {
+            currentPlayer = whitePlayer;
         } else {
-            current = blackPlayer;
+            currentPlayer = blackPlayer;
         }
 
         Disks disks = Disks.getInstance();
-        if (!disks.checkHittable(current.getName())) {
-            if (current == blackPlayer) {
-                current = whitePlayer;
+        // パス判定
+        if (!disks.checkHittable(currentPlayer.getName())) {
+            if (currentPlayer == blackPlayer) {
+                currentPlayer = whitePlayer;
             } else {
-                current = blackPlayer;
+                currentPlayer = blackPlayer;
             }
         }
     }
@@ -109,6 +110,7 @@ public class Player {
         table.setScoreLabel(Name.Black, blackScore);
         table.setScoreLabel(Name.White, whiteScore);
 
+        // ゲーム終了判定
         if (blackScore + whiteScore == 64) {
             table.showResult();
         }

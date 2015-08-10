@@ -14,13 +14,13 @@ public class Disks {
     private final List<List<Circle>> listOfList = new ArrayList<>();
 
     private Disks() {
-        double circleSize = 30;
+        double diskSize = 30;
 
         for (int col = 0; col < 8; col++) {
             List<Circle> list = new ArrayList<>();
             listOfList.add(list);
             for (int row = 0; row < 8; row++) {
-                Circle disk = new Circle(circleSize);
+                Circle disk = new Circle(diskSize);
                 disk.setFill(Color.TRANSPARENT);
                 list.add(disk);
 
@@ -100,6 +100,7 @@ public class Disks {
             }
         }
 
+        // はみ出した時
         if (row == -1) {
             return 0;
         }

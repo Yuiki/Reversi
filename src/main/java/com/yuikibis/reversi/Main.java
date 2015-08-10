@@ -11,31 +11,29 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 public class Main extends Application {
-    private Stage primaryStage;
+    private Stage stage;
 
     @Override
     public void start(Stage primaryStage) {
-        this.primaryStage = primaryStage;
+        this.stage = primaryStage;
         initGame();
     }
 
     private void initGame() {
-        Table table = Table.getInstance();
-        Group root = table.getRoot();
-
         String appName = "Reversi";
-        primaryStage.setTitle(appName);
-        primaryStage.setResizable(false);
+        stage.setTitle(appName);
+        stage.setResizable(false);
 
         BorderPane pane = new BorderPane();
+        Table table = Table.getInstance();
+        Group root = table.getRoot();
         pane.setTop(makeMenu());
         pane.setBottom(root);
-
         double sceneSizeWidth = 660;
         double sceneSizeHeight = 700;
         Scene scene = new Scene(pane, sceneSizeWidth, sceneSizeHeight);
-        primaryStage.setScene(scene);
-        primaryStage.show();
+        stage.setScene(scene);
+        stage.show();
 
         //TODO: アイコンの追加。(やり方がいまいちつかめていない。)
         //primaryStage.getIcons().add(new Image(getClass().getResourceAsStream("reversi.png")));
@@ -61,7 +59,7 @@ public class Main extends Application {
     private void resetGame() {
         Player.resetInstance();
         Disks.resetInstance();
-        Table.resetTable();
+        Table.resetInstance();
 
         initGame();
     }
