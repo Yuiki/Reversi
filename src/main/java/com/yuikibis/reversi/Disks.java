@@ -3,7 +3,7 @@ package com.yuikibis.reversi;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
+import javafx.scene.shape.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,20 +11,30 @@ import java.util.Objects;
 
 public class Disks {
     private static Disks disks;
-    private final List<List<Circle>> listOfList = new ArrayList<>();
+    private final List<List<Circle>> listOfDiskList = new ArrayList<>();
+
+    private final List<List<Rectangle>> listOfCollisionDetectionItemList = new ArrayList<>();
 
     private Disks() {
         double diskSize = 30;
 
         for (int col = 0; col < 8; col++) {
-            List<Circle> list = new ArrayList<>();
-            listOfList.add(list);
+            List<Circle> diskList = new ArrayList<>();
+            List<Rectangle> collisionDetectionItemList = new ArrayList<>();
+
+            listOfDiskList.add(diskList);
+            this.listOfCollisionDetectionItemList.add(collisionDetectionItemList);
             for (int row = 0; row < 8; row++) {
                 Circle disk = new Circle(diskSize);
                 disk.setFill(Color.TRANSPARENT);
-                list.add(disk);
+                diskList.add(disk);
 
-                disk.setOnMouseClicked(event -> {
+                // 当たり判定用の四角
+                Rectangle collisionDetectionItem = new Rectangle(70, 70);
+                collisionDetectionItem.setFill(Color.TRANSPARENT);
+                collisionDetectionItemList.add(collisionDetectionItem);
+
+                collisionDetectionItem.setOnMouseClicked(event -> {
                     if (event.getButton().equals(MouseButton.PRIMARY)) {
                         if (disk.getFill() != Color.TRANSPARENT) {
                             return;
@@ -55,7 +65,11 @@ public class Disks {
     }
 
     public Circle getDisk(int col, int row) {
-        return listOfList.get(col).get(row);
+        return listOfDiskList.get(col).get(row);
+    }
+
+    public Rectangle getCollisionDetectionItem(int col, int row) {
+        return listOfCollisionDetectionItemList.get(col).get(row);
     }
 
     public boolean checkHittable(Player.Name name) {
@@ -64,7 +78,7 @@ public class Disks {
                 Coordinate coordinate = new Coordinate(col, row);
 
                 // Diskが置いてあるところは無視。
-                if (listOfList.get(col).get(row).getFill() != Color.TRANSPARENT) {
+                if (listOfDiskList.get(col).get(row).getFill() != Color.TRANSPARENT) {
                     continue;
                 }
 
@@ -92,10 +106,10 @@ public class Disks {
         int row = coordinate.row;
 
         for (row--; row >= 0; row--) {
-            if (listOfList.get(col).get(row).getFill() == Color.TRANSPARENT) {
+            if (listOfDiskList.get(col).get(row).getFill() == Color.TRANSPARENT) {
                 return 0;
             }
-            if (listOfList.get(col).get(row).getFill() == color.getColor()) {
+            if (listOfDiskList.get(col).get(row).getFill() == color.getColor()) {
                 break;
             }
         }
@@ -117,10 +131,10 @@ public class Disks {
         int row = coordinate.row;
 
         for (row++; row < 8; row++) {
-            if (listOfList.get(col).get(row).getFill() == Color.TRANSPARENT) {
+            if (listOfDiskList.get(col).get(row).getFill() == Color.TRANSPARENT) {
                 return 0;
             }
-            if (listOfList.get(col).get(row).getFill() == color.getColor()) {
+            if (listOfDiskList.get(col).get(row).getFill() == color.getColor()) {
                 break;
             }
         }
@@ -141,10 +155,10 @@ public class Disks {
         int row = coordinate.row;
 
         for (col++; col < 8; col++) {
-            if (listOfList.get(col).get(row).getFill() == Color.TRANSPARENT) {
+            if (listOfDiskList.get(col).get(row).getFill() == Color.TRANSPARENT) {
                 return 0;
             }
-            if (listOfList.get(col).get(row).getFill() == color.getColor()) {
+            if (listOfDiskList.get(col).get(row).getFill() == color.getColor()) {
                 break;
             }
         }
@@ -165,10 +179,10 @@ public class Disks {
         int row = coordinate.row;
 
         for (col--; col >= 0; col--) {
-            if (listOfList.get(col).get(row).getFill() == Color.TRANSPARENT) {
+            if (listOfDiskList.get(col).get(row).getFill() == Color.TRANSPARENT) {
                 return 0;
             }
-            if (listOfList.get(col).get(row).getFill() == color.getColor()) {
+            if (listOfDiskList.get(col).get(row).getFill() == color.getColor()) {
                 break;
             }
         }
@@ -189,10 +203,10 @@ public class Disks {
         int row = coordinate.row;
 
         for (col++, row--; col < 8 && row >= 0; col++, row--) {
-            if (listOfList.get(col).get(row).getFill() == Color.TRANSPARENT) {
+            if (listOfDiskList.get(col).get(row).getFill() == Color.TRANSPARENT) {
                 return 0;
             }
-            if (listOfList.get(col).get(row).getFill() == color.getColor()) {
+            if (listOfDiskList.get(col).get(row).getFill() == color.getColor()) {
                 break;
             }
         }
@@ -213,10 +227,10 @@ public class Disks {
         int row = coordinate.row;
 
         for (col--, row--; col >= 0 && row >= 0; col--, row--) {
-            if (listOfList.get(col).get(row).getFill() == Color.TRANSPARENT) {
+            if (listOfDiskList.get(col).get(row).getFill() == Color.TRANSPARENT) {
                 return 0;
             }
-            if (listOfList.get(col).get(row).getFill() == color.getColor()) {
+            if (listOfDiskList.get(col).get(row).getFill() == color.getColor()) {
                 break;
             }
         }
@@ -237,10 +251,10 @@ public class Disks {
         int row = coordinate.row;
 
         for (col++, row++; col < 8 && row < 8; col++, row++) {
-            if (listOfList.get(col).get(row).getFill() == Color.TRANSPARENT) {
+            if (listOfDiskList.get(col).get(row).getFill() == Color.TRANSPARENT) {
                 return 0;
             }
-            if (listOfList.get(col).get(row).getFill() == color.getColor()) {
+            if (listOfDiskList.get(col).get(row).getFill() == color.getColor()) {
                 break;
             }
         }
@@ -261,10 +275,10 @@ public class Disks {
         int row = coordinate.row;
 
         for (col--, row++; col >= 0 && row < 8; col--, row++) {
-            if (listOfList.get(col).get(row).getFill() == Color.TRANSPARENT) {
+            if (listOfDiskList.get(col).get(row).getFill() == Color.TRANSPARENT) {
                 return 0;
             }
-            if (listOfList.get(col).get(row).getFill() == color.getColor()) {
+            if (listOfDiskList.get(col).get(row).getFill() == color.getColor()) {
                 break;
             }
         }

@@ -64,6 +64,9 @@ public class Table {
             for (int row = 0; row < 8; row++) {
                 pane.add(disks.getDisk(col, row), col, row);
                 GridPane.setMargin(disks.getDisk(col, row), new Insets(diskMargin, diskMargin, diskMargin, diskMargin));
+
+                // 当たり判定アイテムを追加
+                pane.add(disks.getCollisionDetectionItem(col, row), col, row);
             }
         }
 
